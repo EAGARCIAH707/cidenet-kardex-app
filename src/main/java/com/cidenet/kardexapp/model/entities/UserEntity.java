@@ -1,5 +1,6 @@
 package com.cidenet.kardexapp.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -60,9 +61,10 @@ public class UserEntity implements Serializable {
     @Column(name = "last_modified")
     private Date lastModified;
 
-    @Basic
-    @Column(name = "role_id")
-    private Integer roleId;
+    @JsonIgnore
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    @ManyToOne
+    private RoleEntity roleId;
 
 
 }
