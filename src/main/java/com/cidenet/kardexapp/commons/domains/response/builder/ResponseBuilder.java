@@ -27,36 +27,36 @@ public class ResponseBuilder<T> {
         return new ResponseBuilder();
     }
 
-    public ResponseBuilder withResponse(T response) {
+    public ResponseBuilder<T> withResponse(T response) {
         this.response = response;
         this.timeResponse = LocalDateTime.now();
         return this;
     }
 
-    public ResponseBuilder withPath(String path) {
+    public ResponseBuilder<T> withPath(String path) {
         this.path = path;
         this.timeResponse = LocalDateTime.now();
         return this;
     }
 
-    public ResponseBuilder withStatus(HttpStatus status) {
+    public ResponseBuilder<T> withStatus(HttpStatus status) {
         this.httpStatus = status;
         return this;
     }
 
-    public ResponseBuilder withMessage(String message) {
+    public ResponseBuilder<T> withMessage(String message) {
         this.message = message;
         this.timeResponse = LocalDateTime.now();
         return this;
     }
 
-    public ResponseBuilder withTransactionState(TransactionState state) {
+    public ResponseBuilder<T> withTransactionState(TransactionState state) {
         this.state = state;
         this.timeResponse = LocalDateTime.now();
         return this;
     }
 
-    public ResponseBuilder withHeader(String key, String value) {
+    public ResponseBuilder<T> withHeader(String key, String value) {
         this.header.add(key, value);
         this.timeResponse = LocalDateTime.now();
         return this;
@@ -65,6 +65,6 @@ public class ResponseBuilder<T> {
     public ResponseEntity<BaseResponse<T>> buildResponse() {
         BaseResponse<T> base = new BaseResponse<>(this.response, this.httpStatus, this.timeResponse, this.message,
                 this.path, this.state);
-        return new ResponseEntity<BaseResponse<T>>(base, this.header, this.httpStatus);
+        return new ResponseEntity<>(base, this.header, this.httpStatus);
     }
 }

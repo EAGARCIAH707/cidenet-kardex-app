@@ -38,11 +38,15 @@ public class KardexEntity implements Serializable {
 
     @Basic
     @Column(name = "unit_cost")
-    private Integer unitCost;
+    private Double unitCost;
 
     @Basic
     @Column(name = "total_cost")
-    private Integer totalCost;
+    private Double totalCost;
+
+    @Basic
+    @Column(name = "quantity")
+    private Integer quantity;
 
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     @ManyToOne(optional = false)
@@ -53,4 +57,5 @@ public class KardexEntity implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kardexId")
     private List<InEntity> inList;
+
 }

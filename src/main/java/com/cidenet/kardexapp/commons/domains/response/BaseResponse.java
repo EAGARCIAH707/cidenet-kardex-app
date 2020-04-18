@@ -26,4 +26,12 @@ public class BaseResponse<T> implements Serializable {
         this.path = path;
         this.transactionState = transactionState;
     }
+
+    public BaseResponse(T response, HttpStatus httpStatus, LocalDateTime timeResponse, String message, TransactionState state) {
+        this.body = response;
+        this.status = httpStatus;
+        this.timeResponse = timeResponse;
+        this.message = message;
+        this.transactionState = state;
+    }
 }

@@ -34,11 +34,11 @@ public class ProductEntity implements Serializable {
 
     @Basic
     @Column(name = "sale_price")
-    private Integer salePrice;
+    private Double salePrice;
 
     @Basic
     @Column(name = "purchase_price")
-    private Integer purchasePrice;
+    private Double purchasePrice;
 
     @Basic
     @Column(name = "description")

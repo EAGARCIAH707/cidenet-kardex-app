@@ -1,6 +1,5 @@
 package com.cidenet.kardexapp.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class OutEntity implements Serializable {
 
     @Basic
     @Column(name = "unit_value")
-    private Integer unitValue;
+    private Double unitValue;
 
     @Basic
     @Column(name = "observation")
@@ -42,14 +41,12 @@ public class OutEntity implements Serializable {
 
     @Basic
     @Column(name = "total_value")
-    private Integer totalValue;
+    private Double totalValue;
 
     @Basic
     @Column(name = "date")
     private Timestamp date;
 
-/*    @JoinColumn(name = "kardex_id", referencedColumnName = "id_kardex", nullable = false)
-    @ManyToOne(optional = false)*/
     private Integer kardexId;
 
 }

@@ -14,9 +14,10 @@ public class KardexDTO {
 
     private Integer idKardex;
     private Integer productId;
+    private Integer quantity;
     private Integer minimumStock;
     private Integer maximumStock;
     private String reference;
-    private Integer unitCost;
-    private Integer totalCost;
+    private Double unitCost;
+    private Double totalCost;
 }

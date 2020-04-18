@@ -14,6 +14,7 @@ public class KardexConverter {
                 .productId(ProductEntity.builder().productId(kardexDTO.getProductId()).build())
                 .minimumStock(kardexDTO.getMinimumStock())
                 .maximumStock(kardexDTO.getMaximumStock())
+                .quantity(kardexDTO.getQuantity())
                 .reference(kardexDTO.getReference())
                 .unitCost(kardexDTO.getUnitCost())
                 .totalCost(kardexDTO.getTotalCost())
@@ -23,6 +24,7 @@ public class KardexConverter {
     public KardexDTO converterProductToKardexDTO(ProductEntity productEntity) {
         return KardexDTO.builder()
                 .productId(productEntity.getProductId())
+                .quantity(productEntity.getQuantity())
                 .maximumStock(productEntity.getQuantity())
                 .minimumStock(productEntity.getQuantity())
                 .unitCost(productEntity.getPurchasePrice())

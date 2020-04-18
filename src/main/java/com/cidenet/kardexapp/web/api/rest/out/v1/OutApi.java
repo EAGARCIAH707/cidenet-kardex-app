@@ -8,6 +8,7 @@ import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.OutEntity;
 import com.cidenet.kardexapp.service.out.IOutService;
+import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class OutApi {
 
     @ResponseBody
     @PostMapping(IEndpointOut.CREATE_OUT)
-    public ResponseEntity<?> createIn(@RequestBody OutDTO outDTO) throws SystemException {
+    public ResponseEntity<?> createIn(@RequestBody OutDTO outDTO) throws SystemException, NotFoundException {
         OutEntity outResponse = outService.createOut(outDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(outResponse)

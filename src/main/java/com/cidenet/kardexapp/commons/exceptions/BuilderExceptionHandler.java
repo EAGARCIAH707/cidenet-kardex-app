@@ -4,6 +4,7 @@ import com.cidenet.kardexapp.commons.domains.response.builder.ExceptionBuilder;
 import com.cidenet.kardexapp.commons.enums.TransactionState;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,20 +13,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class BuilderExceptionHandler {
 
     @ExceptionHandler({SystemException.class})
-    public SystemException systemException(SystemException e) {
+    public ResponseEntity<?> systemException(SystemException e) {
         return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withRootException(e)
+                .withRootException(e.toString())
                 .withHttpStatus(HttpStatus.CONFLICT)
                 .withTransactionState(TransactionState.FAIL)
                 .buildSystemException();
     }
 
     @ExceptionHandler({Exception.class})
-    public SystemException exception(Exception e) {
+    public ResponseEntity<?> exception(Exception e) {
         return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withRootException(e)
+                .withRootException(e.toString())
                 .withHttpStatus(HttpStatus.CONFLICT)
                 .withTransactionState(TransactionState.FAIL)
                 .buildSystemException();
@@ -33,10 +34,10 @@ public class BuilderExceptionHandler {
     }
 
     @ExceptionHandler({NotFoundException.class})
-    public SystemException notFound(NotFoundException e) {
+    public ResponseEntity<?> notFound(NotFoundException e) {
         return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withRootException(e)
+                .withRootException(e.toString())
                 .withHttpStatus(HttpStatus.NOT_FOUND)
                 .withTransactionState(TransactionState.FAIL)
                 .buildSystemException();

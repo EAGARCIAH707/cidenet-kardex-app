@@ -17,7 +17,7 @@ public class InDTO {
     private Timestamp lastModified;
     private Integer kardexId;
     private String observation;
-    private Integer unitValue;
-    private Integer totalValue;
+    private Double unitValue;
+    private Double totalValue;
     private Timestamp date;
 }

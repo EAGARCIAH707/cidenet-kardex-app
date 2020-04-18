@@ -2,7 +2,9 @@ package com.cidenet.kardexapp.service.kardex.impl;
 
 import com.cidenet.kardexapp.commons.converter.KardexConverter;
 import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
+import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
+import com.cidenet.kardexapp.model.entities.OutEntity;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.repository.kardex.impl.KardexRepositoryFacade;
 import com.cidenet.kardexapp.service.kardex.IKardexService;
@@ -43,6 +45,34 @@ public class KardexServiceImpl implements IKardexService {
             return kardex.get();
         } else {
             throw new NotFoundException("resource not found <KardexEntity>");
+        }
+    }
+
+    @Override
+    public KardexEntity updateKardexFromIn(InEntity inEntity, KardexEntity kardexEntity) throws NotFoundException {
+        kardexEntity.setQuantity(kardexEntity.getQuantity() + inEntity.getQuantity());
+        kardexEntity.setTotalCost(inEntity.getTotalValue() + kardexEntity.getTotalCost());
+        kardexEntity.setUnitCost(kardexEntity.getTotalCost() /
+                (kardexEntity.getQuantity() == 0 ? 1 : kardexEntity.getQuantity()));
+        return saveKardex(kardexEntity);
+    }
+
+    @Override
+    public KardexEntity updateKardexFromOut(OutEntity outEntity, KardexEntity kardexEntity) throws NotFoundException {
+        kardexEntity.setQuantity(kardexEntity.getQuantity() - outEntity.getQuantity());
+        kardexEntity.setTotalCost(kardexEntity.getTotalCost() - outEntity.getTotalValue());
+        kardexEntity.setUnitCost(kardexEntity.getTotalCost() /
+                (kardexEntity.getQuantity() == 0 ? 1 : kardexEntity.getQuantity()));
+        return saveKardex(kardexEntity);
+    }
+
+    @Override
+    public KardexEntity saveKardex(KardexEntity kardexEntity) throws NotFoundException {
+        Optional<KardexEntity> kardex = kardexRepository.save(kardexEntity);
+        if (kardex.isPresent()) {
+            return kardex.get();
+        } else {
+            throw new NotFoundException("Unable to update resource<KardexEntity>");
         }
     }
 }
