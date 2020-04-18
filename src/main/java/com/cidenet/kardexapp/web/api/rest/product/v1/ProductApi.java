@@ -4,6 +4,7 @@ import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
 import com.cidenet.kardexapp.commons.constants.api.product.IEndpointProduct;
 import com.cidenet.kardexapp.commons.domains.generic.ProductDTO;
 import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
+import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.service.product.IProductService;
@@ -29,6 +30,7 @@ public class ProductApi {
                 .withPath(IEndpointProduct.CREATE_PRODUCT)
                 .withMessage("successfully created")
                 .withStatus(HttpStatus.CREATED)
+                .withTransactionState(TransactionState.OK)
                 .buildResponse();
     }
 }

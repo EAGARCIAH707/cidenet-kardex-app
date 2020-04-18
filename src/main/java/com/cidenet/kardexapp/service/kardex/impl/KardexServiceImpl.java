@@ -24,7 +24,6 @@ public class KardexServiceImpl implements IKardexService {
     @Override
     public KardexDTO createKardexDTO(ProductEntity productEntity) {
         return kardexConverter.converterProductToKardexDTO(productEntity);
-
     }
 
     @Override
@@ -45,6 +44,5 @@ public class KardexServiceImpl implements IKardexService {
         } else {
             throw new NotFoundException("resource not found <KardexEntity>");
         }
-
     }
 }

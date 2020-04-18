@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @XmlRootElement
 @Builder
 @ToString
-public class InDTO {
+public class OutDTO {
     private Integer inId;
     private Integer quantity;
     private Timestamp lastModified;
@@ -21,3 +21,4 @@ public class InDTO {
     private Integer totalValue;
     private Timestamp date;
 }
+

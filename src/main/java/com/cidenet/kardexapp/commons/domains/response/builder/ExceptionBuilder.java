@@ -1,13 +1,16 @@
 package com.cidenet.kardexapp.commons.domains.response.builder;
 
 
+import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
 
 public class ExceptionBuilder {
     private String message;
     private Throwable rootException;
-    private HttpStatus httpStatus;
+    TransactionState state;
 
     private ExceptionBuilder() {
     }
@@ -27,7 +30,12 @@ public class ExceptionBuilder {
     }
 
     public ExceptionBuilder withHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
+        return this;
+    }
+
+    public ExceptionBuilder withTransactionState(TransactionState state) {
+        LocalDateTime timeResponse = LocalDateTime.now();
+        this.state = state;
         return this;
     }
 

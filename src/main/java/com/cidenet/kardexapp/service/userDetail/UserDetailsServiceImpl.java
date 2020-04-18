@@ -1,6 +1,5 @@
 package com.cidenet.kardexapp.service.userDetail;
 
-
 import com.cidenet.kardexapp.model.entities.UserEntity;
 import com.cidenet.kardexapp.repository.user.impl.UserRepositoryFacade;
 import org.springframework.beans.factory.annotation.Autowired;

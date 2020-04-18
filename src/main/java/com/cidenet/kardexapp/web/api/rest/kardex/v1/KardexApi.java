@@ -3,6 +3,7 @@ package com.cidenet.kardexapp.web.api.rest.kardex.v1;
 import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
 import com.cidenet.kardexapp.commons.constants.api.kardex.EndpointKardex;
 import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
+import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
 import com.cidenet.kardexapp.service.kardex.IKardexService;
 import javassist.NotFoundException;
@@ -28,8 +29,9 @@ public class KardexApi {
         return ResponseBuilder.newBuilder()
                 .withResponse(kardexResponse)
                 .withPath(EndpointKardex.FIND_KARDEX_BY_ID)
-                .withMessage("consulta exitosa")
+                .withMessage("successful consultation")
                 .withStatus(HttpStatus.OK)
+                .withTransactionState(TransactionState.OK)
                 .buildResponse();
     }
 

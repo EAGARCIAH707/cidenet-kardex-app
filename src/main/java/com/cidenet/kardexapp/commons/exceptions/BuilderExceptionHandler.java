@@ -1,9 +1,9 @@
 package com.cidenet.kardexapp.commons.exceptions;
 
-import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
+import com.cidenet.kardexapp.commons.domains.response.builder.ExceptionBuilder;
+import com.cidenet.kardexapp.commons.enums.TransactionState;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,29 +12,33 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class BuilderExceptionHandler {
 
     @ExceptionHandler({SystemException.class})
-    public ResponseEntity<?> systemException(SystemException e) {
-        return ResponseBuilder.newBuilder()
-                .withResponse("business exception")
+    public SystemException systemException(SystemException e) {
+        return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withStatus(HttpStatus.CONFLICT)
-                .buildResponse();
+                .withRootException(e)
+                .withHttpStatus(HttpStatus.CONFLICT)
+                .withTransactionState(TransactionState.FAIL)
+                .buildSystemException();
     }
 
     @ExceptionHandler({Exception.class})
-    public ResponseEntity<?> exception(Exception e) {
-        return ResponseBuilder.newBuilder()
-                .withResponse("Generic system error")
+    public SystemException exception(Exception e) {
+        return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withStatus(HttpStatus.CONFLICT)
-                .buildResponse();
+                .withRootException(e)
+                .withHttpStatus(HttpStatus.CONFLICT)
+                .withTransactionState(TransactionState.FAIL)
+                .buildSystemException();
+
     }
 
     @ExceptionHandler({NotFoundException.class})
-    public ResponseEntity<?> notFound(NotFoundException e) {
-        return ResponseBuilder.newBuilder()
-                .withResponse("System error, not found")
+    public SystemException notFound(NotFoundException e) {
+        return ExceptionBuilder.newBuilder()
                 .withMessage(e.getMessage())
-                .withStatus(HttpStatus.NOT_FOUND)
-                .buildResponse();
+                .withRootException(e)
+                .withHttpStatus(HttpStatus.NOT_FOUND)
+                .withTransactionState(TransactionState.FAIL)
+                .buildSystemException();
     }
 }

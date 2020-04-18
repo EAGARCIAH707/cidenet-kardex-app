@@ -20,7 +20,6 @@ public class PersistenceConfigApp {
     @Value("${spring.datasource.driver-class-name}")
     private String driverClassName;
 
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

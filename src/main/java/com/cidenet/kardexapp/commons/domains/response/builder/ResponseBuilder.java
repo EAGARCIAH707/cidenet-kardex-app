@@ -63,7 +63,8 @@ public class ResponseBuilder<T> {
     }
 
     public ResponseEntity<BaseResponse<T>> buildResponse() {
-        BaseResponse<T> base = new BaseResponse<>(this.response, this.httpStatus, this.timeResponse, this.message, this.path, this.state);
+        BaseResponse<T> base = new BaseResponse<>(this.response, this.httpStatus, this.timeResponse, this.message,
+                this.path, this.state);
         return new ResponseEntity<BaseResponse<T>>(base, this.header, this.httpStatus);
     }
 }

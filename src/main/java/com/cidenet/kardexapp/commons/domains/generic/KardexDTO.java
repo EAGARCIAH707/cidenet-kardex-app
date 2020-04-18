@@ -2,7 +2,6 @@ package com.cidenet.kardexapp.commons.domains.generic;
 
 import lombok.*;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data

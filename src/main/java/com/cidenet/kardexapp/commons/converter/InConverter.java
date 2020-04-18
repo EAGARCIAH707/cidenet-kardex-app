@@ -2,7 +2,6 @@ package com.cidenet.kardexapp.commons.converter;
 
 import com.cidenet.kardexapp.commons.domains.generic.InDTO;
 import com.cidenet.kardexapp.model.entities.InEntity;
-import com.cidenet.kardexapp.model.entities.KardexEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 

@@ -1,33 +1,33 @@
-package com.cidenet.kardexapp.web.api.rest.in.v1;
+package com.cidenet.kardexapp.web.api.rest.out.v1;
 
 import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
-import com.cidenet.kardexapp.commons.constants.api.in.IEndpointIn;
-import com.cidenet.kardexapp.commons.domains.generic.InDTO;
+import com.cidenet.kardexapp.commons.constants.api.out.IEndpointOut;
+import com.cidenet.kardexapp.commons.domains.generic.OutDTO;
 import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
 import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
-import com.cidenet.kardexapp.model.entities.InEntity;
-import com.cidenet.kardexapp.service.in.IInService;
+import com.cidenet.kardexapp.model.entities.OutEntity;
+import com.cidenet.kardexapp.service.out.IOutService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
-public class InApi {
-    private final IInService inService;
+public class OutApi {
+    private final IOutService outService;
 
-    public InApi(IInService inService) {
-        this.inService = inService;
+    public OutApi(IOutService outService) {
+        this.outService = outService;
     }
 
     @ResponseBody
-    @PostMapping(IEndpointIn.CREATE_IN)
-    public ResponseEntity<?> createIn(@RequestBody InDTO inDTO) throws SystemException {
-        InEntity inResponse = inService.createIn(inDTO);
+    @PostMapping(IEndpointOut.CREATE_OUT)
+    public ResponseEntity<?> createIn(@RequestBody OutDTO outDTO) throws SystemException {
+        OutEntity outResponse = outService.createOut(outDTO);
         return ResponseBuilder.newBuilder()
-                .withResponse(inResponse)
-                .withPath(IEndpointIn.CREATE_IN)
+                .withResponse(outResponse)
+                .withPath(IEndpointOut.CREATE_OUT)
                 .withMessage("successfully created")
                 .withStatus(HttpStatus.CREATED)
                 .withTransactionState(TransactionState.OK)
