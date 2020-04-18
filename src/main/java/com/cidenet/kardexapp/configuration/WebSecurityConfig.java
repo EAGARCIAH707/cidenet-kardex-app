@@ -1,6 +1,7 @@
 package com.cidenet.kardexapp.configuration;
 
-import com.cidenet.kardexapp.commons.constants.api.EndpointUserApi;
+import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
+import com.cidenet.kardexapp.commons.constants.api.user.IEndpointUser;
 import com.cidenet.kardexapp.service.userDetail.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -52,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(EndpointUserApi.API_USER.concat(EndpointUserApi.LOGIN)).permitAll()
+                .antMatchers(EnpointApi.BASE_PATH.concat(IEndpointUser.LOGIN)).permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement()

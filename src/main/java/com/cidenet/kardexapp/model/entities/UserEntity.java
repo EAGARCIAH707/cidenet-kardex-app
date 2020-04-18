@@ -23,6 +23,7 @@ public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Basic

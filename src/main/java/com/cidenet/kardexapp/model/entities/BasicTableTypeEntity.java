@@ -19,6 +19,7 @@ public class BasicTableTypeEntity implements Serializable {
 
     @Id
     @Column(name = "basic_table_type_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer basicTableTypeId;
 
     @Basic

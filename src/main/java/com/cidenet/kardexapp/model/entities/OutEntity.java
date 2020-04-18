@@ -20,6 +20,7 @@ public class OutEntity implements Serializable {
 
     @Id
     @Column(name = "out_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer outId;
 
     @Basic

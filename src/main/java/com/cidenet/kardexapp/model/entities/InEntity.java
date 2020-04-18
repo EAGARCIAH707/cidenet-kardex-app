@@ -14,12 +14,13 @@ import java.sql.Timestamp;
 @XmlRootElement
 @EqualsAndHashCode
 @Data
-@Table(name = "IN", schema = "public", catalog = "dbicriapg8213v")
+@Table(name = "_in", catalog = "dbicriapg8213v")
 public class InEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "in_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer inId;
 
     @Basic

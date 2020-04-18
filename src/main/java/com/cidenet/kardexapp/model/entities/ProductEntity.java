@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +21,7 @@ public class ProductEntity implements Serializable {
 
     @Id
     @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
     @Basic
@@ -52,11 +54,11 @@ public class ProductEntity implements Serializable {
 
     @Basic
     @Column(name = "created_on")
-    private Date createdOn;
+    private Timestamp createdOn;
 
     @Basic
     @Column(name = "last_modified")
-    private Date lastModified;
+    private Timestamp lastModified;
 
     @Basic
     @Column(name = "quantity")

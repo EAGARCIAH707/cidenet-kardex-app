@@ -20,6 +20,7 @@ public class RoleEntity implements Serializable {
 
     @Id
     @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
 
     @Basic

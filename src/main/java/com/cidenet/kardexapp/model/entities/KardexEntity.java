@@ -19,6 +19,7 @@ public class KardexEntity implements Serializable {
 
     @Id
     @Column(name = "id_kardex")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idKardex;
 
     @Basic
@@ -32,10 +33,6 @@ public class KardexEntity implements Serializable {
     @Basic
     @Column(name = "maximum_stock")
     private Integer maximumStock;
-
-    @Basic
-    @Column(name = "detail")
-    private String detail;
 
     @Basic
     @Column(name = "reference")

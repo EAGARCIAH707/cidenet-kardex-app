@@ -20,6 +20,7 @@ public class ConstantTypeEntity implements Serializable {
 
     @Id
     @Column(name = "constant_type_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer constantTypeId;
 
     @Basic
