@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class KardexConverter {
     public KardexEntity converterKardexDTOToKardexEntity(KardexDTO kardexDTO) {
         return KardexEntity.builder()
-                .productId(kardexDTO.getProductId())
+                .productId(ProductEntity.builder().productId(kardexDTO.getProductId()).build())
                 .minimumStock(kardexDTO.getMinimumStock())
                 .maximumStock(kardexDTO.getMaximumStock())
                 .reference(kardexDTO.getReference())

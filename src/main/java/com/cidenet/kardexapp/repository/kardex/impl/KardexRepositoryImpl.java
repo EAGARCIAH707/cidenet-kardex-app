@@ -18,4 +18,9 @@ public class KardexRepositoryImpl implements KardexRepositoryFacade {
     public Optional<KardexEntity> save(KardexEntity kardexEntity) {
         return Optional.of(kardexRepository.save(kardexEntity));
     }
+
+    @Override
+    public Optional<KardexEntity> findById(Integer kardexId) {
+        return kardexRepository.findById(kardexId);
+    }
 }

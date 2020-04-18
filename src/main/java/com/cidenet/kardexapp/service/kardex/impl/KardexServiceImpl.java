@@ -6,6 +6,7 @@ import com.cidenet.kardexapp.model.entities.KardexEntity;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.repository.kardex.impl.KardexRepositoryFacade;
 import com.cidenet.kardexapp.service.kardex.IKardexService;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -34,5 +35,16 @@ public class KardexServiceImpl implements IKardexService {
     @Override
     public Optional<KardexEntity> createKardexFromProduct(ProductEntity productEntity) {
         return createProdutc(createKardexDTO(productEntity));
+    }
+
+    @Override
+    public KardexEntity findKardexById(Integer kardexId) throws NotFoundException {
+        Optional<KardexEntity> kardex = kardexRepository.findById(kardexId);
+        if (kardex.isPresent()) {
+            return kardex.get();
+        } else {
+            throw new NotFoundException("resource not found <KardexEntity>");
+        }
+
     }
 }

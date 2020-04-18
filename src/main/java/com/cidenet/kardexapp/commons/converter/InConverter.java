@@ -2,6 +2,7 @@ package com.cidenet.kardexapp.commons.converter;
 
 import com.cidenet.kardexapp.commons.domains.generic.InDTO;
 import com.cidenet.kardexapp.model.entities.InEntity;
+import com.cidenet.kardexapp.model.entities.KardexEntity;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,7 @@ public class InConverter {
                 .kardexId(inDTO.getKardexId())
                 .observation(inDTO.getObservation())
                 .unitValue(inDTO.getUnitValue())
-                .totalValue(inDTO.getTotalValue())
+                .totalValue(inDTO.getQuantity() * inDTO.getUnitValue())
                 .date(inDTO.getDate())
                 .build();
     }

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,9 +23,6 @@ public class KardexEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idKardex;
 
-    @Basic
-    @Column(name = "product_id")
-    private Integer productId;
 
     @Basic
     @Column(name = "minimum_stock")
@@ -46,4 +44,13 @@ public class KardexEntity implements Serializable {
     @Column(name = "total_cost")
     private Integer totalCost;
 
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
+    @ManyToOne(optional = false)
+    private ProductEntity productId;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kardexId")
+    private List<OutEntity> outList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kardexId")
+    private List<InEntity> inList;
 }

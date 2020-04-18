@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface KardexRepositoryFacade {
     Optional<KardexEntity> save(KardexEntity kardexEntity);
+
+    Optional<KardexEntity> findById(Integer kardexId);
 }
