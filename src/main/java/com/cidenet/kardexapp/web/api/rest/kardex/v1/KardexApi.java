@@ -9,13 +9,13 @@ import com.cidenet.kardexapp.service.kardex.IKardexService;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.PUT})
 public class KardexApi {
     private final IKardexService kardexService;
 
@@ -29,6 +29,18 @@ public class KardexApi {
         return ResponseBuilder.newBuilder()
                 .withResponse(kardexResponse)
                 .withPath(EndpointKardex.FIND_KARDEX_BY_ID)
+                .withMessage("successful consultation")
+                .withStatus(HttpStatus.OK)
+                .withTransactionState(TransactionState.OK)
+                .buildResponse();
+    }
+
+    @GetMapping(EndpointKardex.FIND_ALL)
+    public ResponseEntity<?> findAll() {
+        List<KardexEntity> kardexResponse = kardexService.findAll();
+        return ResponseBuilder.newBuilder()
+                .withResponse(kardexResponse)
+                .withPath(EndpointKardex.FIND_ALL)
                 .withMessage("successful consultation")
                 .withStatus(HttpStatus.OK)
                 .withTransactionState(TransactionState.OK)

@@ -4,6 +4,7 @@ import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.repository.product.IProductRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -17,5 +18,10 @@ public class ProductRepositoryImpl implements ProductRepositoryFacade {
     @Override
     public Optional<ProductEntity> save(ProductEntity productEntity) {
         return Optional.of(productRepository.save(productEntity));
+    }
+
+    @Override
+    public List<ProductEntity> findAll() {
+        return productRepository.findAll();
     }
 }

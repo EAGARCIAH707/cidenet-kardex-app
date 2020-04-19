@@ -52,9 +52,5 @@ public class ExceptionBuilder<T> {
                 this.state);
         return new ResponseEntity<>(base, this.httpStatus);
     }
-
-/*    public SystemException buildSystemException() {
-        return new SystemException(message, rootException);
-    }*/
 }
 

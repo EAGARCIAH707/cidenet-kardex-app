@@ -3,10 +3,9 @@ package com.cidenet.kardexapp.commons.domains.response.builder;
 
 import com.cidenet.kardexapp.commons.domains.response.BaseResponse;
 import com.cidenet.kardexapp.commons.enums.TransactionState;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +17,7 @@ public class ResponseBuilder<T> {
     private String path;
     private String message;
     private TransactionState state;
-    MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
+    HttpHeaders responseHeaders = new HttpHeaders();
 
     private ResponseBuilder() {
     }
@@ -57,7 +56,9 @@ public class ResponseBuilder<T> {
     }
 
     public ResponseBuilder<T> withHeader(String key, String value) {
-        this.header.add(key, value);
+        this.responseHeaders.set(key, value);
+        this.responseHeaders.set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
+        this.responseHeaders.set("Access-Control-Expose-Headers", "token");
         this.timeResponse = LocalDateTime.now();
         return this;
     }
@@ -65,6 +66,10 @@ public class ResponseBuilder<T> {
     public ResponseEntity<BaseResponse<T>> buildResponse() {
         BaseResponse<T> base = new BaseResponse<>(this.response, this.httpStatus, this.timeResponse, this.message,
                 this.path, this.state);
-        return new ResponseEntity<>(base, this.header, this.httpStatus);
+        return ResponseEntity
+                .status(this.httpStatus)
+                .headers(this.responseHeaders)
+                .body(base);
+
     }
 }

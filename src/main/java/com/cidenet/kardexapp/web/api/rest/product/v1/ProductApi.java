@@ -12,8 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
+@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class ProductApi {
     private final IProductService productService;
 
@@ -23,13 +26,26 @@ public class ProductApi {
 
     @ResponseBody
     @PostMapping(IEndpointProduct.CREATE_PRODUCT)
-    public ResponseEntity<?> createIn(@RequestBody ProductDTO productDTO) throws SystemException {
+    public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO) throws SystemException {
         ProductEntity productReponse = productService.createProduct(productDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(productReponse)
                 .withPath(IEndpointProduct.CREATE_PRODUCT)
                 .withMessage("successfully created")
                 .withStatus(HttpStatus.CREATED)
+                .withTransactionState(TransactionState.OK)
+                .buildResponse();
+    }
+
+    @ResponseBody
+    @GetMapping(IEndpointProduct.GET_PRODUCTS)
+    public ResponseEntity<?> getAll() {
+        List<ProductEntity> productsReponse = productService.getAllProducts();
+        return ResponseBuilder.newBuilder()
+                .withResponse(productsReponse)
+                .withPath(IEndpointProduct.GET_PRODUCTS)
+                .withMessage("successfully created")
+                .withStatus(HttpStatus.OK)
                 .withTransactionState(TransactionState.OK)
                 .buildResponse();
     }

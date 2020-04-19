@@ -9,6 +9,7 @@ import com.cidenet.kardexapp.service.kardex.impl.KardexServiceImpl;
 import com.cidenet.kardexapp.service.product.IProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class ProductServiceImpl implements IProductService {
         } else {
             throw new SystemException("Not possible create product");
         }
+    }
+
+    @Override
+    public List<ProductEntity> getAllProducts() {
+        return productRepository.findAll();
     }
 }

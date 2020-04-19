@@ -11,6 +11,7 @@ import com.cidenet.kardexapp.service.kardex.IKardexService;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,5 +75,10 @@ public class KardexServiceImpl implements IKardexService {
         } else {
             throw new NotFoundException("Unable to update resource<KardexEntity>");
         }
+    }
+
+    @Override
+    public List<KardexEntity> findAll() {
+        return kardexRepository.findAll();
     }
 }

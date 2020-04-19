@@ -7,6 +7,7 @@ import com.cidenet.kardexapp.model.entities.OutEntity;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import javassist.NotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IKardexService {
@@ -23,4 +24,6 @@ public interface IKardexService {
     KardexEntity updateKardexFromOut(OutEntity outEntity, KardexEntity kardexEntity) throws NotFoundException;
 
     KardexEntity saveKardex(KardexEntity kardexEntity) throws NotFoundException;
+
+    List<KardexEntity> findAll();
 }
