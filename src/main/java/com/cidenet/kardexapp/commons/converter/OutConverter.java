@@ -18,8 +18,11 @@ public class OutConverter {
                 .kardexId(outDTO.getKardexId())
                 .observation(outDTO.getObservation())
                 .unitValue(outDTO.getUnitValue())
-                .totalValue(outDTO.getQuantity() * outDTO.getUnitValue())
-                .date(outDTO.getDate())
+                .totalValue(outDTO.getTotalValue())
+                .kTotalValue(outDTO.getKTotalValue())
+                .kUnitValue(outDTO.getKUnitValue())
+                .date(outDTO.getDate() != null ? outDTO.getDate() : new Timestamp(new Date().getTime()))
+                .type(1)
                 .build();
     }
 }

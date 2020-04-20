@@ -28,8 +28,20 @@ public class InEntity implements Serializable {
     private Integer quantity;
 
     @Basic
+    @Column(name = "type")
+    private Integer type;
+
+    @Basic
     @Column(name = "last_modified")
     private Timestamp lastModified;
+
+    @Basic
+    @Column(name = "k_unit_value")
+    private Double kUnitValue;
+
+    @Basic
+    @Column(name = "k_total_value")
+    private Double kTotalValue;
 
     @Basic
     @Column(name = "observation")

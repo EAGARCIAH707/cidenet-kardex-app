@@ -28,15 +28,36 @@ public class InServiceImpl implements IInService {
     @Override
     public InEntity createIn(InDTO inDTO) throws SystemException, NotFoundException {
         KardexEntity kardex = kardexService.findKardexById(inDTO.getKardexId());
-        Double unitCost = inDTO.getUnitValue() > 0 ? inDTO.getUnitValue() :
-                (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
-        inDTO.setUnitValue(unitCost);
-        Optional<InEntity> in = inRepository.save(inConverter.converterInDTOToInEntity(inDTO));
+        Optional<InEntity> in = inRepository.save(inConverter.converterInDTOToInEntity(calculateValues(inDTO, kardex)));
         if (in.isPresent()) {
-            kardexService.updateKardexFromIn(in.get(), kardex);
             return in.get();
         } else {
             throw new SystemException("Not possible create In");
         }
+    }
+
+    public InDTO calculateValues(InDTO inDTO, KardexEntity kardex) {
+        Double unitCost = inDTO.getUnitValue() > 0 ? inDTO.getUnitValue()
+                : (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
+        inDTO.setUnitValue(unitCost);
+        inDTO.setTotalValue(inDTO.getQuantity() * inDTO.getUnitValue());
+        kardex.setQuantity(kardex.getQuantity() + inDTO.getQuantity());
+        kardex.setTotalCost(kardex.getTotalCost() + inDTO.getTotalValue());
+        kardex.setUnitCost(kardex.getTotalCost() / (kardex.getQuantity() == 0 ? 1 : kardex.getQuantity()));
+        inDTO.setKTotalValue(kardex.getTotalCost());
+        inDTO.setKUnitValue(kardex.getUnitCost());
+
+        kardexService.updateKardex(kardex);
+        return inDTO;
+    }
+
+    @Override
+    public void createInFromKardex(KardexEntity kardexEntity) {
+        save(inConverter.converterKardexToIn(kardexEntity));
+    }
+
+    @Override
+    public void save(InEntity inEntity) {
+        inRepository.save(inEntity);
     }
 }

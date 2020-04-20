@@ -13,17 +13,13 @@ import java.util.Optional;
 public interface IKardexService {
     KardexDTO createKardexDTO(ProductEntity productEntity);
 
-    Optional<KardexEntity> createProdutc(KardexDTO kardexDTO);
+    Optional<KardexEntity> createKardex(KardexDTO kardexDTO);
 
     Optional<KardexEntity> createKardexFromProduct(ProductEntity productEntity);
 
     KardexEntity findKardexById(Integer kardexId) throws NotFoundException;
 
-    KardexEntity updateKardexFromIn(InEntity inEntity, KardexEntity kardexEntity) throws NotFoundException;
-
-    KardexEntity updateKardexFromOut(OutEntity outEntity, KardexEntity kardexEntity) throws NotFoundException;
-
-    KardexEntity saveKardex(KardexEntity kardexEntity) throws NotFoundException;
-
     List<KardexEntity> findAll();
+
+    void updateKardex(KardexEntity kardexEntity);
 }

@@ -20,5 +20,7 @@ public class OutDTO {
     private Double unitValue;
     private Double totalValue;
     private Timestamp date;
+    private Double kUnitValue;
+    private Double kTotalValue;
 }
 

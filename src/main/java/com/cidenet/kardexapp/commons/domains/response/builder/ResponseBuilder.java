@@ -57,8 +57,6 @@ public class ResponseBuilder<T> {
 
     public ResponseBuilder<T> withHeader(String key, String value) {
         this.responseHeaders.set(key, value);
-        this.responseHeaders.set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
-        this.responseHeaders.set("Access-Control-Expose-Headers", "token");
         this.timeResponse = LocalDateTime.now();
         return this;
     }

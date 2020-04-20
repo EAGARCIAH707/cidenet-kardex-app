@@ -19,9 +19,11 @@ public class KardexServiceImpl implements IKardexService {
     private final KardexRepositoryFacade kardexRepository;
     private final KardexConverter kardexConverter;
 
+
     public KardexServiceImpl(KardexRepositoryFacade kardexRepositoryFacade, KardexConverter kardexConverter) {
         this.kardexRepository = kardexRepositoryFacade;
         this.kardexConverter = kardexConverter;
+
     }
 
     @Override
@@ -30,13 +32,14 @@ public class KardexServiceImpl implements IKardexService {
     }
 
     @Override
-    public Optional<KardexEntity> createProdutc(KardexDTO kardexDTO) {
+    public Optional<KardexEntity> createKardex(KardexDTO kardexDTO) {
         return kardexRepository.save(kardexConverter.converterKardexDTOToKardexEntity(kardexDTO));
     }
 
     @Override
     public Optional<KardexEntity> createKardexFromProduct(ProductEntity productEntity) {
-        return createProdutc(createKardexDTO(productEntity));
+        return createKardex(createKardexDTO(productEntity));
+
     }
 
     @Override
@@ -50,35 +53,12 @@ public class KardexServiceImpl implements IKardexService {
     }
 
     @Override
-    public KardexEntity updateKardexFromIn(InEntity inEntity, KardexEntity kardexEntity) throws NotFoundException {
-        kardexEntity.setQuantity(kardexEntity.getQuantity() + inEntity.getQuantity());
-        kardexEntity.setTotalCost(inEntity.getTotalValue() + kardexEntity.getTotalCost());
-        kardexEntity.setUnitCost(kardexEntity.getTotalCost() /
-                (kardexEntity.getQuantity() == 0 ? 1 : kardexEntity.getQuantity()));
-        return saveKardex(kardexEntity);
-    }
-
-    @Override
-    public KardexEntity updateKardexFromOut(OutEntity outEntity, KardexEntity kardexEntity) throws NotFoundException {
-        kardexEntity.setQuantity(kardexEntity.getQuantity() - outEntity.getQuantity());
-        kardexEntity.setTotalCost(kardexEntity.getTotalCost() - outEntity.getTotalValue());
-        kardexEntity.setUnitCost(kardexEntity.getTotalCost() /
-                (kardexEntity.getQuantity() == 0 ? 1 : kardexEntity.getQuantity()));
-        return saveKardex(kardexEntity);
-    }
-
-    @Override
-    public KardexEntity saveKardex(KardexEntity kardexEntity) throws NotFoundException {
-        Optional<KardexEntity> kardex = kardexRepository.save(kardexEntity);
-        if (kardex.isPresent()) {
-            return kardex.get();
-        } else {
-            throw new NotFoundException("Unable to update resource<KardexEntity>");
-        }
-    }
-
-    @Override
     public List<KardexEntity> findAll() {
         return kardexRepository.findAll();
+    }
+
+    @Override
+    public void updateKardex(KardexEntity kardexEntity) {
+        kardexRepository.save(kardexEntity);
     }
 }

@@ -28,15 +28,28 @@ public class OutServiceImpl implements IOutService {
     @Override
     public OutEntity createOut(OutDTO outDTO) throws SystemException, NotFoundException {
         KardexEntity kardex = kardexService.findKardexById(outDTO.getKardexId());
-        Double unitCost = outDTO.getUnitValue() > 0 ? outDTO.getUnitValue() :
-                (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
-        outDTO.setUnitValue(unitCost);
-        Optional<OutEntity> out = outRepository.save(outConverter.converterOutDTOToInEntity(outDTO));
+        Optional<OutEntity> out = outRepository.save(outConverter
+                .converterOutDTOToInEntity(calculateValues(outDTO, kardex)));
         if (out.isPresent()) {
-            kardexService.updateKardexFromOut(out.get(), kardex);
             return out.get();
         } else {
             throw new SystemException("Not possible create Out");
         }
+    }
+
+    public OutDTO calculateValues(OutDTO outDTO, KardexEntity kardex) {
+        Double unitCost = outDTO.getUnitValue() > 0 ? outDTO.getUnitValue() :
+                (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
+        outDTO.setUnitValue(unitCost);
+        outDTO.setTotalValue(outDTO.getQuantity() * outDTO.getUnitValue());
+        kardex.setQuantity(kardex.getQuantity() - outDTO.getQuantity());
+        kardex.setTotalCost(kardex.getTotalCost() - outDTO.getTotalValue());
+        kardex.setUnitCost(kardex.getTotalCost() /
+                (kardex.getQuantity() == 0 ? 1 : kardex.getQuantity()));
+        outDTO.setUnitValue(unitCost);
+        outDTO.setKTotalValue(kardex.getTotalCost());
+        outDTO.setKUnitValue(kardex.getUnitCost());
+        kardexService.updateKardex(kardex);
+        return outDTO;
     }
 }

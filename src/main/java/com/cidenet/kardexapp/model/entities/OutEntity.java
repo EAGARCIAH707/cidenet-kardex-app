@@ -28,6 +28,10 @@ public class OutEntity implements Serializable {
     private Integer quantity;
 
     @Basic
+    @Column(name = "type")
+    private Integer type;
+
+    @Basic
     @Column(name = "last_modified")
     private Timestamp lastModified;
 
@@ -42,6 +46,14 @@ public class OutEntity implements Serializable {
     @Basic
     @Column(name = "total_value")
     private Double totalValue;
+
+    @Basic
+    @Column(name = "k_unit_value")
+    private Double kUnitValue;
+
+    @Basic
+    @Column(name = "k_total_value")
+    private Double kTotalValue;
 
     @Basic
     @Column(name = "date")
