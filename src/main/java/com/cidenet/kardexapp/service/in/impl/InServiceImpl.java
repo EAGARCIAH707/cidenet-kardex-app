@@ -40,10 +40,13 @@ public class InServiceImpl implements IInService {
         Double unitCost = inDTO.getUnitValue() > 0 ? inDTO.getUnitValue()
                 : (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         inDTO.setUnitValue(unitCost);
-        inDTO.setTotalValue(inDTO.getQuantity() * inDTO.getUnitValue());
+        inDTO.setTotalValue(inDTO.getQuantity() * unitCost);
+
         kardex.setQuantity(kardex.getQuantity() + inDTO.getQuantity());
         kardex.setTotalCost(kardex.getTotalCost() + inDTO.getTotalValue());
         kardex.setUnitCost(kardex.getTotalCost() / (kardex.getQuantity() == 0 ? 1 : kardex.getQuantity()));
+
+        inDTO.setKQuantity(kardex.getQuantity());
         inDTO.setKTotalValue(kardex.getTotalCost());
         inDTO.setKUnitValue(kardex.getUnitCost());
 

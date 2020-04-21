@@ -22,6 +22,7 @@ public class InConverter {
                 .totalValue(inDTO.getTotalValue())
                 .kTotalValue(inDTO.getKTotalValue())
                 .kUnitValue(inDTO.getUnitValue())
+                .kQuantity(inDTO.getKQuantity())
                 .type(0)
                 .date(inDTO.getDate() != null ? inDTO.getDate() : new Timestamp(new Date().getTime()))
                 .build();
@@ -34,6 +35,7 @@ public class InConverter {
                 .totalValue(kardexEntity.getTotalCost())
                 .kUnitValue(kardexEntity.getUnitCost())
                 .kTotalValue(kardexEntity.getTotalCost())
+                .kQuantity(kardexEntity.getQuantity())
                 .kardexId(kardexEntity.getIdKardex())
                 .observation("Creacion Prod")
                 .type(0)

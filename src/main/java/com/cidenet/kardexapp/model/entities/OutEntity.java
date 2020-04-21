@@ -56,6 +56,10 @@ public class OutEntity implements Serializable {
     private Double kTotalValue;
 
     @Basic
+    @Column(name = "k_quantity")
+    private Integer kQuantity;
+
+    @Basic
     @Column(name = "date")
     private Timestamp date;
 

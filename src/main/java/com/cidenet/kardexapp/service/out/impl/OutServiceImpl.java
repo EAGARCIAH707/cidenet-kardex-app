@@ -41,12 +41,14 @@ public class OutServiceImpl implements IOutService {
         Double unitCost = outDTO.getUnitValue() > 0 ? outDTO.getUnitValue() :
                 (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         outDTO.setUnitValue(unitCost);
-        outDTO.setTotalValue(outDTO.getQuantity() * outDTO.getUnitValue());
+        outDTO.setTotalValue(outDTO.getQuantity() * unitCost);
+
         kardex.setQuantity(kardex.getQuantity() - outDTO.getQuantity());
         kardex.setTotalCost(kardex.getTotalCost() - outDTO.getTotalValue());
         kardex.setUnitCost(kardex.getTotalCost() /
                 (kardex.getQuantity() == 0 ? 1 : kardex.getQuantity()));
-        outDTO.setUnitValue(unitCost);
+
+        outDTO.setKQuantity(kardex.getQuantity());
         outDTO.setKTotalValue(kardex.getTotalCost());
         outDTO.setKUnitValue(kardex.getUnitCost());
         kardexService.updateKardex(kardex);

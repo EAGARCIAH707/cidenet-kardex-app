@@ -22,4 +22,5 @@ public class InDTO {
     private Timestamp date;
     private Double kUnitValue;
     private Double kTotalValue;
+    private Integer kQuantity;
 }

@@ -21,6 +21,7 @@ public class OutConverter {
                 .totalValue(outDTO.getTotalValue())
                 .kTotalValue(outDTO.getKTotalValue())
                 .kUnitValue(outDTO.getKUnitValue())
+                .kQuantity(outDTO.getKQuantity())
                 .date(outDTO.getDate() != null ? outDTO.getDate() : new Timestamp(new Date().getTime()))
                 .type(1)
                 .build();

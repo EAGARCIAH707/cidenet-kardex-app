@@ -40,6 +40,10 @@ public class InEntity implements Serializable {
     private Double kUnitValue;
 
     @Basic
+    @Column(name = "k_quantity")
+    private Integer kQuantity;
+
+    @Basic
     @Column(name = "k_total_value")
     private Double kTotalValue;
 
