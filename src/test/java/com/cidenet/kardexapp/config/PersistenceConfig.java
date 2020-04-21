@@ -1,6 +1,5 @@
-package com.cidenet.kardexapp.configuration;
+package com.cidenet.kardexapp.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +10,13 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableConfigurationProperties
-@Profile({"dev","prod"})
-public class PersistenceConfigApp {
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
-    @Value("${spring.datasource.driver-class-name}")
-    private String driverClassName;
+@Profile("test")
+public class PersistenceConfig {
+
+    private String url = "jdbc:postgresql://ec2-52-7-39-178.compute-1.amazonaws.com:5432/d4q77k6rjf8s95";
+    private String username = "uhvjlughtqmzhm";
+    private String password = "b7f945521002ac5d6f184297446d07395914050938d96a94274820fb80f23696";
+    private String driverClassName = "org.postgresql.Driver";
 
     @Bean
     public DataSource dataSource() {

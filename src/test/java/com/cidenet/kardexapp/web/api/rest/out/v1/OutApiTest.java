@@ -1,11 +1,10 @@
-package com.cidenet.kardexapp.web.api.rest.in.v1;
+package com.cidenet.kardexapp.web.api.rest.out.v1;
 
 import com.cidenet.kardexapp.auth.test.AuthTest;
 import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
-import com.cidenet.kardexapp.commons.constants.api.in.IEndpointIn;
-import com.cidenet.kardexapp.commons.constants.api.user.IEndpointUser;
-import com.cidenet.kardexapp.commons.domains.generic.InDTO;
-import com.cidenet.kardexapp.testdatabuilder.InDTOTestDataBuilder;
+import com.cidenet.kardexapp.commons.constants.api.out.IEndpointOut;
+import com.cidenet.kardexapp.commons.domains.generic.OutDTO;
+import com.cidenet.kardexapp.testdatabuilder.OutDTOTestDataBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +19,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("test")
-class InApiTest {
+class OutApiTest {
 
     @Autowired
     private MockMvc mvc;
@@ -33,13 +31,13 @@ class InApiTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void createIn() throws Exception {
-        InDTO inDTO = new InDTOTestDataBuilder().inBuilder();
+    void createOut() throws Exception {
+        OutDTO outDTO = new OutDTOTestDataBuilder().OutBuilder();
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(AuthTest.createToken());
         mvc.perform(MockMvcRequestBuilders
-                .post(EnpointApi.BASE_PATH.concat(IEndpointIn.CREATE_IN))
-                .content(objectMapper.writeValueAsString(inDTO))
+                .post(EnpointApi.BASE_PATH.concat(IEndpointOut.CREATE_OUT))
+                .content(objectMapper.writeValueAsString(outDTO))
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())

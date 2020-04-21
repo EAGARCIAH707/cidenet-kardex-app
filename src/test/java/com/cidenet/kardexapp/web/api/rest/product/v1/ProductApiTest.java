@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
+@ActiveProfiles("test")
 class ProductApiTest {
     @Autowired
     private MockMvc mvc;
@@ -43,6 +45,21 @@ class ProductApiTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
+    }
+
+    @Test
+    void createProductFail() throws Exception {
+        ProductDTO product = new ProductDTODataBuilder().productBuilder();
+        product.setReference(null);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(AuthTest.createToken());
+        mvc.perform(MockMvcRequestBuilders
+                .post(EnpointApi.BASE_PATH.concat(IEndpointProduct.CREATE_PRODUCT))
+                .content(objectMapper.writeValueAsString(product))
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isConflict());
     }
 
     @Test
