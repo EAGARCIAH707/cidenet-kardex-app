@@ -44,7 +44,7 @@ public class ProductApi {
         return ResponseBuilder.newBuilder()
                 .withResponse(productsReponse)
                 .withPath(IEndpointProduct.GET_PRODUCTS)
-                .withMessage("successfully created")
+                .withMessage("successful consultation")
                 .withStatus(HttpStatus.OK)
                 .withTransactionState(TransactionState.OK)
                 .buildResponse();

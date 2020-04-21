@@ -35,7 +35,7 @@ public class InConverter {
                 .kUnitValue(kardexEntity.getUnitCost())
                 .kTotalValue(kardexEntity.getTotalCost())
                 .kardexId(kardexEntity.getIdKardex())
-                .observation("Producto creado")
+                .observation("Creacion Prod")
                 .type(0)
                 .date(new Timestamp(new Date().getTime()))
                 .lastModified(new Timestamp(new Date().getTime()))
