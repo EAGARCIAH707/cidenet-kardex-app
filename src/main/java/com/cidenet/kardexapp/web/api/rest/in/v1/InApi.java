@@ -6,7 +6,6 @@ import com.cidenet.kardexapp.commons.domains.generic.InDTO;
 import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
 import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
-import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.service.in.IInService;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
+@CrossOrigin(origins = "*")
 public class InApi {
     private final IInService inService;
 
