@@ -8,6 +8,7 @@ import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.service.product.IProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(origins = "*")
+@Log4j2
 public class ProductApi {
     private final IProductService productService;
 
@@ -27,6 +29,7 @@ public class ProductApi {
     @ResponseBody
     @PostMapping(IEndpointProduct.CREATE_PRODUCT)
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO) throws SystemException {
+        log.info("[POST] Create Product, {}", productDTO);
         ProductDTO productReponse = productService.createProduct(productDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(productReponse)
@@ -40,6 +43,7 @@ public class ProductApi {
     @ResponseBody
     @GetMapping(IEndpointProduct.GET_PRODUCTS)
     public ResponseEntity<?> getAll() {
+        log.info("[GET] Find All Products");
         List<ProductEntity> productsReponse = productService.getAllProducts();
         return ResponseBuilder.newBuilder()
                 .withResponse(productsReponse)

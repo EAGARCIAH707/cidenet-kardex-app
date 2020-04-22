@@ -9,6 +9,7 @@ import com.cidenet.kardexapp.repository.product.impl.ProductRepositoryFacade;
 import com.cidenet.kardexapp.service.in.IInService;
 import com.cidenet.kardexapp.service.kardex.impl.KardexServiceImpl;
 import com.cidenet.kardexapp.service.product.IProductService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class ProductServiceImpl implements IProductService {
     private final ProductRepositoryFacade productRepository;
     private final ProductConverter productConverter;
@@ -33,6 +35,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     @Transactional
     public ProductDTO createProduct(ProductDTO productDTO) throws SystemException {
+        log.info("Create product,{}", productDTO);
         Optional<ProductEntity> product = productRepository
                 .save(productConverter.converterProductDTOtoProductEntity(productDTO));
         if (product.isPresent()) {
@@ -41,9 +44,11 @@ public class ProductServiceImpl implements IProductService {
                 inService.createInFromKardex(kardex.get());
                 return productConverter.converterProdEntityToProdDTO(product.get());
             } else {
+                log.error("Not possible create kardex,{}", kardex);
                 throw new SystemException("Not posible create kardex for product");
             }
         } else {
+            log.error("Not possible create product,{}", product);
             throw new SystemException("Not possible create product");
         }
     }

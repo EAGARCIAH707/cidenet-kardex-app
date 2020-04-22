@@ -8,6 +8,7 @@ import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
 import com.cidenet.kardexapp.service.kardex.IKardexService;
 import javassist.NotFoundException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = EnpointApi.BASE_PATH)
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.PUT})
+@CrossOrigin(origins = "*")
+@Log4j2
 public class KardexApi {
     private final IKardexService kardexService;
 
@@ -26,6 +28,7 @@ public class KardexApi {
 
     @GetMapping(EndpointKardex.FIND_KARDEX_BY_ID)
     public ResponseEntity<?> getKardexById(@PathVariable("kardexId") Integer kardexId) throws NotFoundException {
+        log.info("[GET] Find Kardex By Id, {}", kardexId);
         KardexDTO kardexResponse = kardexService.findKardexById(kardexId);
         return ResponseBuilder.newBuilder()
                 .withResponse(kardexResponse)
@@ -38,6 +41,7 @@ public class KardexApi {
 
     @GetMapping(EndpointKardex.FIND_ALL)
     public ResponseEntity<?> findAll() {
+        log.info("[GET] Find All Kardex");
         List<KardexEntity> kardexResponse = kardexService.findAll();
         return ResponseBuilder.newBuilder()
                 .withResponse(kardexResponse)
