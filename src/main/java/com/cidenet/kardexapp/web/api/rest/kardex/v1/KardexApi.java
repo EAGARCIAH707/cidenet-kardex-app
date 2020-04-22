@@ -2,6 +2,7 @@ package com.cidenet.kardexapp.web.api.rest.kardex.v1;
 
 import com.cidenet.kardexapp.commons.constants.api.EnpointApi;
 import com.cidenet.kardexapp.commons.constants.api.kardex.EndpointKardex;
+import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
 import com.cidenet.kardexapp.commons.domains.response.builder.ResponseBuilder;
 import com.cidenet.kardexapp.commons.enums.TransactionState;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
@@ -25,7 +26,7 @@ public class KardexApi {
 
     @GetMapping(EndpointKardex.FIND_KARDEX_BY_ID)
     public ResponseEntity<?> getKardexById(@PathVariable("kardexId") Integer kardexId) throws NotFoundException {
-        KardexEntity kardexResponse = kardexService.findKardexById(kardexId);
+        KardexDTO kardexResponse = kardexService.findKardexById(kardexId);
         return ResponseBuilder.newBuilder()
                 .withResponse(kardexResponse)
                 .withPath(EndpointKardex.FIND_KARDEX_BY_ID)

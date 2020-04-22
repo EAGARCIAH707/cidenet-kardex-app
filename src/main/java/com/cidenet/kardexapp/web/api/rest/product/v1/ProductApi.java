@@ -27,7 +27,7 @@ public class ProductApi {
     @ResponseBody
     @PostMapping(IEndpointProduct.CREATE_PRODUCT)
     public ResponseEntity<?> createProduct(@RequestBody ProductDTO productDTO) throws SystemException {
-        ProductEntity productReponse = productService.createProduct(productDTO);
+        ProductDTO productReponse = productService.createProduct(productDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(productReponse)
                 .withPath(IEndpointProduct.CREATE_PRODUCT)

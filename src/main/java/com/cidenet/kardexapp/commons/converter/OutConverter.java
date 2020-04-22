@@ -26,4 +26,21 @@ public class OutConverter {
                 .type(1)
                 .build();
     }
+
+    public OutDTO converterOutEntityToOutDTO(OutEntity outEntity) {
+        return OutDTO.builder()
+                .outId(outEntity.getOutId())
+                .quantity(outEntity.getQuantity())
+                .type(outEntity.getType())
+                .lastModified(outEntity.getLastModified())
+                .kUnitValue(outEntity.getKUnitValue())
+                .kQuantity(outEntity.getKQuantity())
+                .kTotalValue(outEntity.getKTotalValue())
+                .observation(outEntity.getObservation())
+                .unitValue(outEntity.getUnitValue())
+                .totalValue(outEntity.getTotalValue())
+                .date(outEntity.getDate())
+                .kardexId(outEntity.getKardexId())
+                .build();
+    }
 }

@@ -7,7 +7,7 @@ import com.cidenet.kardexapp.model.entities.ProductEntity;
 import java.util.List;
 
 public interface IProductService {
-    ProductEntity createProduct(ProductDTO productDTO) throws SystemException;
+    ProductDTO createProduct(ProductDTO productDTO) throws SystemException;
 
     List<ProductEntity> getAllProducts();
 }

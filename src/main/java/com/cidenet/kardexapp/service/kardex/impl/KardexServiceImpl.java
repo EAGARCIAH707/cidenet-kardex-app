@@ -2,9 +2,7 @@ package com.cidenet.kardexapp.service.kardex.impl;
 
 import com.cidenet.kardexapp.commons.converter.KardexConverter;
 import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
-import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
-import com.cidenet.kardexapp.model.entities.OutEntity;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.repository.kardex.impl.KardexRepositoryFacade;
 import com.cidenet.kardexapp.service.kardex.IKardexService;
@@ -43,10 +41,10 @@ public class KardexServiceImpl implements IKardexService {
     }
 
     @Override
-    public KardexEntity findKardexById(Integer kardexId) throws NotFoundException {
+    public KardexDTO findKardexById(Integer kardexId) throws NotFoundException {
         Optional<KardexEntity> kardex = kardexRepository.findById(kardexId);
         if (kardex.isPresent()) {
-            return kardex.get();
+            return kardexConverter.converterProdEntityToProdDTO(kardex.get());
         } else {
             throw new NotFoundException("resource not found <KardexEntity>");
         }
@@ -58,7 +56,7 @@ public class KardexServiceImpl implements IKardexService {
     }
 
     @Override
-    public void updateKardex(KardexEntity kardexEntity) {
-        kardexRepository.save(kardexEntity);
+    public void updateKardex(KardexDTO kardexEntity) {
+        kardexRepository.save(kardexConverter.converterKardexDTOToKardexEntity(kardexEntity));
     }
 }

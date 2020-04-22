@@ -25,4 +25,20 @@ public class ProductConverter {
                 .quantity(productDTO.getQuantity())
                 .build();
     }
+
+    public ProductDTO converterProdEntityToProdDTO(ProductEntity productEntity) {
+        return ProductDTO.builder()
+                .productId(productEntity.getProductId())
+                .name(productEntity.getName())
+                .reference(productEntity.getReference())
+                .salePrice(productEntity.getSalePrice())
+                .purchasePrice(productEntity.getPurchasePrice())
+                .description(productEntity.getDescription())
+                .state(productEntity.getState())
+                .available(productEntity.getAvailable())
+                .createdOn(productEntity.getCreatedOn())
+                .lastModified(productEntity.getLastModified())
+                .quantity(productEntity.getQuantity())
+                .build();
+    }
 }

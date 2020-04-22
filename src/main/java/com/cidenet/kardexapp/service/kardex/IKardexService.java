@@ -1,9 +1,7 @@
 package com.cidenet.kardexapp.service.kardex;
 
 import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
-import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
-import com.cidenet.kardexapp.model.entities.OutEntity;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import javassist.NotFoundException;
 
@@ -17,9 +15,9 @@ public interface IKardexService {
 
     Optional<KardexEntity> createKardexFromProduct(ProductEntity productEntity);
 
-    KardexEntity findKardexById(Integer kardexId) throws NotFoundException;
+    KardexDTO findKardexById(Integer kardexId) throws NotFoundException;
 
     List<KardexEntity> findAll();
 
-    void updateKardex(KardexEntity kardexEntity);
+    void updateKardex(KardexDTO kardexEntity);
 }

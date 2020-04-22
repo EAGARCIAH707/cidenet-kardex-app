@@ -30,14 +30,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public ProductEntity createProduct(ProductDTO productDTO) throws SystemException {
+    public ProductDTO createProduct(ProductDTO productDTO) throws SystemException {
         Optional<ProductEntity> product = productRepository
                 .save(productConverter.converterProductDTOtoProductEntity(productDTO));
         if (product.isPresent()) {
             Optional<KardexEntity> kardex = kardexService.createKardexFromProduct(product.get());
             if (kardex.isPresent()) {
                 inService.createInFromKardex(kardex.get());
-                return product.get();
+                return productConverter.converterProdEntityToProdDTO(product.get());
             } else {
                 throw new SystemException("Not posible create kardex for product");
             }

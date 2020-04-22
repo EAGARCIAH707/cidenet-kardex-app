@@ -2,6 +2,7 @@ package com.cidenet.kardexapp.service.in.impl;
 
 import com.cidenet.kardexapp.commons.converter.InConverter;
 import com.cidenet.kardexapp.commons.domains.generic.InDTO;
+import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
@@ -26,17 +27,17 @@ public class InServiceImpl implements IInService {
     }
 
     @Override
-    public InEntity createIn(InDTO inDTO) throws SystemException, NotFoundException {
-        KardexEntity kardex = kardexService.findKardexById(inDTO.getKardexId());
+    public InDTO createIn(InDTO inDTO) throws SystemException, NotFoundException {
+        KardexDTO kardex = kardexService.findKardexById(inDTO.getKardexId());
         Optional<InEntity> in = inRepository.save(inConverter.converterInDTOToInEntity(calculateValues(inDTO, kardex)));
         if (in.isPresent()) {
-            return in.get();
+            return inConverter.converterInEntityToInDTO(in.get());
         } else {
             throw new SystemException("Not possible create In");
         }
     }
 
-    public InDTO calculateValues(InDTO inDTO, KardexEntity kardex) {
+    public InDTO calculateValues(InDTO inDTO, KardexDTO kardex) {
         Double unitCost = inDTO.getUnitValue() > 0 ? inDTO.getUnitValue()
                 : (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         inDTO.setUnitValue(unitCost);

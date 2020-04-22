@@ -25,7 +25,7 @@ public class OutApi {
     @ResponseBody
     @PostMapping(IEndpointOut.CREATE_OUT)
     public ResponseEntity<?> createOut(@RequestBody OutDTO outDTO) throws SystemException, NotFoundException {
-        OutEntity outResponse = outService.createOut(outDTO);
+        OutDTO outResponse = outService.createOut(outDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(outResponse)
                 .withPath(IEndpointOut.CREATE_OUT)

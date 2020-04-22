@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Builder
 @ToString
 public class OutDTO {
-    private Integer inId;
+    private Integer outId;
     private Integer quantity;
     private Timestamp lastModified;
     private Integer kardexId;
@@ -23,5 +23,6 @@ public class OutDTO {
     private Double kUnitValue;
     private Double kTotalValue;
     private Integer kQuantity;
+    private Integer type;
 }
 

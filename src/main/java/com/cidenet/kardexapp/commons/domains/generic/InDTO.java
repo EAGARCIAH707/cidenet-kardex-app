@@ -23,4 +23,5 @@ public class InDTO {
     private Double kUnitValue;
     private Double kTotalValue;
     private Integer kQuantity;
+    private Integer type;
 }

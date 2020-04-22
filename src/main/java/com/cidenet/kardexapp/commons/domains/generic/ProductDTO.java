@@ -3,7 +3,7 @@ package com.cidenet.kardexapp.commons.domains.generic;
 import lombok.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class ProductDTO {
     private String description;
     private Boolean state;
     private Boolean available;
-    private Date createdOn;
-    private Date lastModified;
+    private Timestamp createdOn;
+    private Timestamp lastModified;
     private Integer quantity;
 }

@@ -18,11 +18,12 @@ public class InDTOTestDataBuilder {
     private Double kUnitValue;
     private Double kTotalValue;
     private Integer kQuantity;
+    private Integer type;
 
     public InDTOTestDataBuilder() {
-        this.quantity = 10;
+        this.quantity = 45;
         this.lastModified = new Timestamp(new Date().getTime());
-        this.kardexId = 1;
+        this.kardexId = 2;
         this.observation = "test";
         this.date = new Timestamp(new Date().getTime());
         this.unitValue = 0.0;
@@ -31,6 +32,6 @@ public class InDTOTestDataBuilder {
 
     public InDTO inBuilder() {
         return new InDTO(inId, quantity, lastModified, kardexId, observation, unitValue, totalValue, date, kUnitValue,
-                kTotalValue, kQuantity);
+                kTotalValue, kQuantity,type);
     }
 }

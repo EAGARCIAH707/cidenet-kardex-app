@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class OutDTOTestDataBuilder {
-    private Integer inId;
+    private Integer outId;
     private Integer quantity;
     private Timestamp lastModified;
     private Integer kardexId;
@@ -17,18 +17,19 @@ public class OutDTOTestDataBuilder {
     private Double kUnitValue;
     private Double kTotalValue;
     private Integer kQuantity;
+    private Integer type;
 
     public OutDTOTestDataBuilder() {
-        this.quantity = 10;
+        this.quantity = 45;
         this.lastModified = new Timestamp(new Date().getTime());
-        this.kardexId = 1;
+        this.kardexId = 2;
         this.observation = "test";
         this.date = new Timestamp(new Date().getTime());
         this.unitValue = 0.0;
     }
 
     public OutDTO OutBuilder() {
-        return new OutDTO(inId, quantity, lastModified, kardexId, observation, unitValue, totalValue, date, kUnitValue,
-                kTotalValue, kQuantity);
+        return new OutDTO(outId, quantity, lastModified, kardexId, observation, unitValue, totalValue, date, kUnitValue,
+                kTotalValue, kQuantity, type);
     }
 }

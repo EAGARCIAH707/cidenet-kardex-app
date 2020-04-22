@@ -43,4 +43,18 @@ class OutApiTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+    @Test
+    void createOutFail() throws Exception {
+        OutDTO outDTO = new OutDTOTestDataBuilder().OutBuilder();
+        outDTO.setQuantity(100000);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(AuthTest.createToken());
+        mvc.perform(MockMvcRequestBuilders
+                .post(EnpointApi.BASE_PATH.concat(IEndpointOut.CREATE_OUT))
+                .content(objectMapper.writeValueAsString(outDTO))
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isConflict());
+    }
 }

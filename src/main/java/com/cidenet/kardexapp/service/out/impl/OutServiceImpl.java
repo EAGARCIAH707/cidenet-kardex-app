@@ -1,6 +1,7 @@
 package com.cidenet.kardexapp.service.out.impl;
 
 import com.cidenet.kardexapp.commons.converter.OutConverter;
+import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
 import com.cidenet.kardexapp.commons.domains.generic.OutDTO;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
@@ -26,18 +27,21 @@ public class OutServiceImpl implements IOutService {
     }
 
     @Override
-    public OutEntity createOut(OutDTO outDTO) throws SystemException, NotFoundException {
-        KardexEntity kardex = kardexService.findKardexById(outDTO.getKardexId());
+    public OutDTO createOut(OutDTO outDTO) throws SystemException, NotFoundException {
+        KardexDTO kardex = kardexService.findKardexById(outDTO.getKardexId());
+        if (kardex.getQuantity() < outDTO.getQuantity()) {
+            throw new SystemException("The value for the output is higher than the stock");
+        }
         Optional<OutEntity> out = outRepository.save(outConverter
                 .converterOutDTOToInEntity(calculateValues(outDTO, kardex)));
         if (out.isPresent()) {
-            return out.get();
+            return outConverter.converterOutEntityToOutDTO(out.get());
         } else {
             throw new SystemException("Not possible create Out");
         }
     }
 
-    public OutDTO calculateValues(OutDTO outDTO, KardexEntity kardex) {
+    public OutDTO calculateValues(OutDTO outDTO, KardexDTO kardex) {
         Double unitCost = outDTO.getUnitValue() > 0 ? outDTO.getUnitValue() :
                 (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         outDTO.setUnitValue(unitCost);

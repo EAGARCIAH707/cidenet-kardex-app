@@ -3,6 +3,7 @@ package com.cidenet.kardexapp.testdatabuilder;
 import com.cidenet.kardexapp.commons.domains.generic.ProductDTO;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ProductDTODataBuilder {
     private Integer productId;
@@ -13,8 +14,8 @@ public class ProductDTODataBuilder {
     private String description;
     private Boolean state;
     private Boolean available;
-    private Date createdOn;
-    private Date lastModified;
+    private Timestamp createdOn;
+    private Timestamp lastModified;
     private Integer quantity;
 
     public ProductDTODataBuilder() {

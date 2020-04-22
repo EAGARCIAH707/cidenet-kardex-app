@@ -43,4 +43,21 @@ public class InConverter {
                 .lastModified(new Timestamp(new Date().getTime()))
                 .build();
     }
+
+    public InDTO converterInEntityToInDTO(InEntity inEntity) {
+        return InDTO.builder()
+                .inId(inEntity.getInId())
+                .quantity(inEntity.getQuantity())
+                .type(inEntity.getType())
+                .lastModified(inEntity.getLastModified())
+                .kUnitValue(inEntity.getKUnitValue())
+                .kQuantity(inEntity.getKQuantity())
+                .kTotalValue(inEntity.getKTotalValue())
+                .observation(inEntity.getObservation())
+                .unitValue(inEntity.getUnitValue())
+                .totalValue(inEntity.getTotalValue())
+                .date(inEntity.getDate())
+                .kardexId(inEntity.getKardexId())
+                .build();
+    }
 }

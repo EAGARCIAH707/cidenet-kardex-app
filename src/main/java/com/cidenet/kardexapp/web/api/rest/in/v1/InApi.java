@@ -25,7 +25,7 @@ public class InApi {
     @ResponseBody
     @PostMapping(IEndpointIn.CREATE_IN)
     public ResponseEntity<?> createIn(@RequestBody InDTO inDTO) throws SystemException, NotFoundException {
-        InEntity inResponse = inService.createIn(inDTO);
+        InDTO inResponse = inService.createIn(inDTO);
         return ResponseBuilder.newBuilder()
                 .withResponse(inResponse)
                 .withPath(IEndpointIn.CREATE_IN)
