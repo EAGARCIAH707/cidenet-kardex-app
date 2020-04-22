@@ -51,12 +51,22 @@ public class KardexServiceImpl implements IKardexService {
     }
 
     @Override
+    public KardexEntity findKardex(Integer kardexId) throws NotFoundException {
+        Optional<KardexEntity> kardex = kardexRepository.findById(kardexId);
+        if (kardex.isPresent()) {
+            return kardex.get();
+        } else {
+            throw new NotFoundException("Not found Kardex");
+        }
+    }
+
+    @Override
     public List<KardexEntity> findAll() {
         return kardexRepository.findAll();
     }
 
     @Override
-    public void updateKardex(KardexDTO kardexEntity) {
-        kardexRepository.save(kardexConverter.converterKardexDTOToKardexEntity(kardexEntity));
+    public void updateKardex(KardexEntity kardexEntity) {
+        kardexRepository.save(kardexEntity);
     }
 }

@@ -1,7 +1,6 @@
 package com.cidenet.kardexapp.service.out.impl;
 
 import com.cidenet.kardexapp.commons.converter.OutConverter;
-import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
 import com.cidenet.kardexapp.commons.domains.generic.OutDTO;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
@@ -28,7 +27,7 @@ public class OutServiceImpl implements IOutService {
 
     @Override
     public OutDTO createOut(OutDTO outDTO) throws SystemException, NotFoundException {
-        KardexDTO kardex = kardexService.findKardexById(outDTO.getKardexId());
+        KardexEntity kardex = kardexService.findKardex(outDTO.getKardexId());
         if (kardex.getQuantity() < outDTO.getQuantity()) {
             throw new SystemException("The value for the output is higher than the stock");
         }
@@ -41,7 +40,7 @@ public class OutServiceImpl implements IOutService {
         }
     }
 
-    public OutDTO calculateValues(OutDTO outDTO, KardexDTO kardex) {
+    public OutDTO calculateValues(OutDTO outDTO, KardexEntity kardex) {
         Double unitCost = outDTO.getUnitValue() > 0 ? outDTO.getUnitValue() :
                 (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         outDTO.setUnitValue(unitCost);

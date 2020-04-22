@@ -10,6 +10,7 @@ import com.cidenet.kardexapp.service.in.IInService;
 import com.cidenet.kardexapp.service.kardex.impl.KardexServiceImpl;
 import com.cidenet.kardexapp.service.product.IProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTO createProduct(ProductDTO productDTO) throws SystemException {
         Optional<ProductEntity> product = productRepository
                 .save(productConverter.converterProductDTOtoProductEntity(productDTO));

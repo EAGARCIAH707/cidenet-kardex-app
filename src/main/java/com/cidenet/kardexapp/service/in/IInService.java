@@ -10,9 +10,9 @@ import javassist.NotFoundException;
 public interface IInService {
     InDTO createIn(InDTO inDTO) throws SystemException, NotFoundException;
 
-    InDTO calculateValues(InDTO inDTO, KardexDTO kardex);
+    InDTO calculateValues(InDTO inDTO, KardexEntity kardex);
 
-    void createInFromKardex(KardexEntity kardexEntity);
+    void createInFromKardex(KardexEntity kardexEntity) throws SystemException;
 
     void save(InEntity inEntity);
 }

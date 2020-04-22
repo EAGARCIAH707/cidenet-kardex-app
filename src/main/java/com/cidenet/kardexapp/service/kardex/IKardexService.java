@@ -17,7 +17,9 @@ public interface IKardexService {
 
     KardexDTO findKardexById(Integer kardexId) throws NotFoundException;
 
+    KardexEntity findKardex(Integer kardexId) throws NotFoundException;
+
     List<KardexEntity> findAll();
 
-    void updateKardex(KardexDTO kardexEntity);
+    void updateKardex(KardexEntity kardexEntity);
 }

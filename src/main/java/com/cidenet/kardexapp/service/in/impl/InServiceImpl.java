@@ -2,7 +2,6 @@ package com.cidenet.kardexapp.service.in.impl;
 
 import com.cidenet.kardexapp.commons.converter.InConverter;
 import com.cidenet.kardexapp.commons.domains.generic.InDTO;
-import com.cidenet.kardexapp.commons.domains.generic.KardexDTO;
 import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.InEntity;
 import com.cidenet.kardexapp.model.entities.KardexEntity;
@@ -28,7 +27,7 @@ public class InServiceImpl implements IInService {
 
     @Override
     public InDTO createIn(InDTO inDTO) throws SystemException, NotFoundException {
-        KardexDTO kardex = kardexService.findKardexById(inDTO.getKardexId());
+        KardexEntity kardex = kardexService.findKardex(inDTO.getKardexId());
         Optional<InEntity> in = inRepository.save(inConverter.converterInDTOToInEntity(calculateValues(inDTO, kardex)));
         if (in.isPresent()) {
             return inConverter.converterInEntityToInDTO(in.get());
@@ -37,7 +36,7 @@ public class InServiceImpl implements IInService {
         }
     }
 
-    public InDTO calculateValues(InDTO inDTO, KardexDTO kardex) {
+    public InDTO calculateValues(InDTO inDTO, KardexEntity kardex) {
         Double unitCost = inDTO.getUnitValue() > 0 ? inDTO.getUnitValue()
                 : (Math.round(kardex.getUnitCost() * 100.0) / 100.0);
         inDTO.setUnitValue(unitCost);
@@ -56,8 +55,12 @@ public class InServiceImpl implements IInService {
     }
 
     @Override
-    public void createInFromKardex(KardexEntity kardexEntity) {
-        save(inConverter.converterKardexToIn(kardexEntity));
+    public void createInFromKardex(KardexEntity kardexEntity) throws SystemException {
+        if (kardexEntity.getQuantity() > 0) {
+            save(inConverter.converterKardexToIn(kardexEntity));
+        } else {
+            throw new SystemException("It is not possible to create a product with a negative amount");
+        }
     }
 
     @Override
