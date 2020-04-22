@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(EndpointKardex.FIND_ALL)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(EndpointKardex.FIND_KARDEX_BY_ID)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(IEndpointProduct.GET_PRODUCTS)).permitAll()
-                .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(IEndpointProduct.GET_PRODUCTS)).permitAll()
+                .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(IEndpointProduct.CREATE_PRODUCT)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(IEndpointOut.CREATE_OUT)).permitAll()
                 .antMatchers(HttpMethod.OPTIONS, EnpointApi.BASE_PATH.concat(IEndpointIn.CREATE_IN)).permitAll()
                 .anyRequest().authenticated().and()
