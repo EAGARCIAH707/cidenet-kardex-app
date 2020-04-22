@@ -11,7 +11,7 @@
     <groupId>com.cidenet</groupId>
     <artifactId>kardex-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>kardex-app</name>
     <description>This is a technical test by Andrés García for cidenet</description>
 
