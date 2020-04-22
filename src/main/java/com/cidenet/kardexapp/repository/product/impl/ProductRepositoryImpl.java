@@ -1,5 +1,6 @@
 package com.cidenet.kardexapp.repository.product.impl;
 
+import com.cidenet.kardexapp.commons.exceptions.SystemException;
 import com.cidenet.kardexapp.model.entities.ProductEntity;
 import com.cidenet.kardexapp.repository.product.IProductRepository;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,10 @@ public class ProductRepositoryImpl implements ProductRepositoryFacade {
     }
 
     @Override
-    public Optional<ProductEntity> save(ProductEntity productEntity) {
+    public Optional<ProductEntity> save(ProductEntity productEntity) throws SystemException {
+        if (productEntity.getQuantity() < 0) {
+            throw new SystemException("It is not possible to create a product with a negative amount");
+        }
         return Optional.of(productRepository.save(productEntity));
     }
 
