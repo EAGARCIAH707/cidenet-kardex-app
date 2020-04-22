@@ -29,7 +29,7 @@ public class UserApi {
         log.info("User Login  {}", userLoginDTO);
         String token = securityService.authenticate(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         return ResponseBuilder.newBuilder()
-                .withResponse("Login Ok")
+                .withResponse(token)
                 .withHeader("token", token)
                 .withStatus(HttpStatus.OK)
                 .withTransactionState(TransactionState.OK)
